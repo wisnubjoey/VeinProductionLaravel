@@ -24,6 +24,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/bookings', [BookingController::class, 'store']);
 Route::get('/portfolio', [PortfolioController::class, 'index']);
+Route::get('/bookings', [BookingController::class, 'index']);
+Route::patch('/bookings/{id}/status', [BookingController::class, 'updateStatus']);
 
 //protected
 Route::middleware('auth:sanctum')->group(function () {
@@ -31,9 +33,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/me', [AuthController::class, 'me']);
 
     //bookings
-    Route::get('/bookings', [BookingController::class, 'index']);
     Route::get('/bookings/{id}', [BookingController::class, 'show']);
-    Route::patch('/bookings/{id}/status', [BookingController::class, 'updateStatus']);
     Route::delete('/bookings/{id}', [BookingController::class, 'destroy']);
 
     // Portfolio (except index which is public)

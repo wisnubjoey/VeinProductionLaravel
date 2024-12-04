@@ -48,16 +48,16 @@ class BookingController extends Controller
     }
 
     public function updateStatus(Request $request, $id)
-    {
-        $request->validate([
-            'status' => 'required|in:pending,contacted,confirmed,completed',
-        ]);
+{
+    $request->validate([
+        'status' => 'required|in:pending,contacted,confirmed,completed'
+    ]);
 
-        $booking = Booking::findOrFail($id);
-        $booking->update(['status' => $request->status]);
+    $booking = Booking::findOrFail($id);
+    $booking->update(['status' => $request->status]);
 
-        return response()->json($booking);
-    }
+    return response()->json($booking);
+}
 
     public function destroy($id)
     {
