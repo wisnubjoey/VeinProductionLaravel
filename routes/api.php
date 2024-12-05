@@ -21,6 +21,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 //public
+// routes/api.php
+Route::get('/test', function() {
+    return response()->json(['message' => 'API is working!']);
+});
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/bookings', [BookingController::class, 'store']);
 Route::get('/portfolio', [PortfolioController::class, 'index']);
