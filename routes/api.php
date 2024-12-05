@@ -25,6 +25,22 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/test', function() {
     return response()->json(['message' => 'API is working!']);
 });
+
+Route::get('/db-test', function() {
+    try {
+        \DB::connection()->getPdo();
+        return response()->json([
+            'database_connected' => true,
+            'connection_name' => \DB::connection()->getDatabaseName()
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'database_connected' => false,
+            'error' => $e->getMessage()
+        ]);
+    }
+});
+
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/bookings', [BookingController::class, 'store']);
 Route::get('/portfolio', [PortfolioController::class, 'index']);
