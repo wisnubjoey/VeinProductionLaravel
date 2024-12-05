@@ -12,11 +12,15 @@
     ],
     "routes": [
         {
-            "src": "/(css|js|images)/(.*)",
+            "src": "/api/(.*)",  
+            "dest": "/api/index.php"
+        },
+        {
+            "src": "/(css|js|images|fonts)/(.*)",  
             "dest": "/public/$1/$2"
         },
         {
-            "src": "/(.*)",
+            "src": "/(.*)",  
             "dest": "/api/index.php"
         }
     ],
