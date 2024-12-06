@@ -26,13 +26,38 @@ Route::get('/test', function() {
     return response()->json(['message' => 'API is working!']);
 });
 
+// routes/api.php
 Route::get('/db-test', function() {
     try {
-        \DB::connection()->getPdo();
+        $host = env('PG_HOST');
+        $port = env('PG_PORT');
+        $db = env('PG_DB');
+        $user = env('PG_USER');
+        $password = env('PG_PASSWORD');
+        $endpoint = env('PG_ENDPOINT');
+
+        $connection_string = "host=" . $host . 
+                           " port=" . $port . 
+                           " dbname=" . $db . 
+                           " user=" . $user . 
+                           " password=" . $password . 
+                           " options='endpoint=" . $endpoint . "'" .
+                           " sslmode=require";
+
+        $dbconn = pg_connect($connection_string);
+
+        if (!$dbconn) {
+            return response()->json([
+                'database_connected' => false,
+                'error' => pg_last_error()
+            ]);
+        }
+
         return response()->json([
             'database_connected' => true,
-            'connection_name' => \DB::connection()->getDatabaseName()
+            'connection_info' => pg_version($dbconn)
         ]);
+
     } catch (\Exception $e) {
         return response()->json([
             'database_connected' => false,
@@ -40,7 +65,6 @@ Route::get('/db-test', function() {
         ]);
     }
 });
-
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/bookings', [BookingController::class, 'store']);
 Route::get('/portfolio', [PortfolioController::class, 'index']);
