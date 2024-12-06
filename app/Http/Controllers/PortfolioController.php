@@ -9,7 +9,10 @@ class PortfolioController extends Controller
 {
     public function index()
     {
-        $portfolios = Portfolio::latest()->get();
+        $portfolios = Portfolio::latest()
+            ->select('id', 'title', 'media_url', 'type', 'is_featured')
+            ->paginate(6);
+        
         return response()->json($portfolios);
     }
 

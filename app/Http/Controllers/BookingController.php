@@ -10,7 +10,10 @@ class BookingController extends Controller
 {
     public function index()
     {
-        $bookings = Booking::latest()->get();
+        $bookings = Booking::latest()
+            ->select('id', 'client_name', 'event_date', 'event_type', 'package_type', 'status')
+            ->paginate(5);
+        
         return response()->json($bookings);
     }
 
