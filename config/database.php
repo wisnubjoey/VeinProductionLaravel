@@ -77,8 +77,8 @@ return [
     'sslmode' => 'require',
     'options' => [
         'endpoint' => env('PG_ENDPOINT')
-    ],
-],
+            ],
+        ],
 
         'sqlsrv' => [
             'driver' => 'sqlsrv',
