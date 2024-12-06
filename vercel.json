@@ -19,6 +19,8 @@
             "runtime": "vercel-php@0.6.0"
         }
     },
+    "buildCommand": "",
+    "outputDirectory": "public",
     "env": {
         "APP_ENV": "production",
         "APP_DEBUG": "false",
