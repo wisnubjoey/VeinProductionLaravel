@@ -64,21 +64,21 @@ return [
         ],
 
         'pgsql' => [
-            'driver' => 'pgsql',
-            'host' => env('DB_HOST'),
-            'port' => env('DB_PORT'),
-            'database' => env('DB_DATABASE'),
-            'username' => env('DB_USERNAME'),
-            'password' => env('DB_PASSWORD'),
-            'charset' => 'utf8',
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'search_path' => 'public',
-            'sslmode' => 'require',
-            'options' => [
-                PDO::ATTR_TIMEOUT => 3 // 3 seconds timeout
-            ],
-        ],
+    'driver' => 'pgsql',
+    'host' => env('PG_HOST'),
+    'port' => env('PG_PORT'),
+    'database' => env('PG_DB'),
+    'username' => env('PG_USER'),
+    'password' => env('PG_PASSWORD'),
+    'charset' => 'utf8',
+    'prefix' => '',
+    'prefix_indexes' => true,
+    'search_path' => 'public',
+    'sslmode' => 'require',
+    'options' => [
+        'endpoint' => env('PG_ENDPOINT')
+    ],
+],
 
         'sqlsrv' => [
             'driver' => 'sqlsrv',
