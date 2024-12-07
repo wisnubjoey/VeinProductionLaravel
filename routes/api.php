@@ -20,6 +20,10 @@ use App\Http\Controllers\AuthController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('unauthorized', function () {
+    return response()->json(['message' => 'Unauthorized'], 401);
+})->name('login');
 //public
 // routes/api.php
 Route::get('/test', function() {
@@ -68,6 +72,7 @@ Route::get('/db-test', function() {
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/bookings', [BookingController::class, 'store']);
 Route::get('/portfolio', [PortfolioController::class, 'index']);
+Route::get('/portfolio/{id}', [PortfolioController::class, 'show']);
 Route::get('/bookings', [BookingController::class, 'index']);
 Route::patch('/bookings/{id}/status', [BookingController::class, 'updateStatus']);
 
