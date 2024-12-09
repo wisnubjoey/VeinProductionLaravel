@@ -43,14 +43,14 @@ class BookingController extends Controller
 
         $booking = Booking::create($validated);
 
-        // try {
-        //     Mail::raw("Ada Project Baru !", function($message) {
-        //         $message->to('wisnuhutama@outlook.com')
-        //         ->subject('Ada Project Baru !');
-        //     });
-        // } catch (\Exception $e) {
-        //     \Log::error('Error sending email: ' . $e->getMessage());
-        // }
+        try {
+            Mail::raw("Ada Booking Baru!\n\nNama: {$booking->client_name}\nEmail: {$booking->email}\nPackage: {$booking->package_type}", function($message) {
+                $message->to('manusiq630@gmail.com')
+                ->subject('Ada yang mesen pin !');
+            });
+        } catch (\Exception $e) {
+            \Log::error('Error sending email: ' . $e->getMessage());
+        }
 
         return response()->json($booking, 201);
     }
