@@ -11,7 +11,7 @@ class PortfolioController extends Controller
     {
         $portfolios = Portfolio::latest()
             ->select('id', 'title', 'media_url', 'type', 'is_featured')
-            ->paginate(6);
+            ->paginate(50);
         
         return response()->json($portfolios);
     }
