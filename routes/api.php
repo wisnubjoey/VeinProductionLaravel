@@ -75,6 +75,8 @@ Route::get('/portfolio', [PortfolioController::class, 'index']);
 Route::get('/portfolio/{id}', [PortfolioController::class, 'show']);
 Route::get('/bookings', [BookingController::class, 'index']);
 Route::patch('/bookings/{id}/status', [BookingController::class, 'updateStatus']);
+Route::get('/bookings/stats', [BookingController::class, 'getStats']);
+Route::get('/bookings/recent', [BookingController::class, 'getRecent']);
 
 //protected
 Route::middleware('auth:sanctum')->group(function () {

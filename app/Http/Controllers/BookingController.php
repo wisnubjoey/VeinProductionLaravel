@@ -79,5 +79,25 @@ class BookingController extends Controller
         $booking->delete();
         return response()->json(null, 204);
     }
+
+    public function getStats()
+{
+    $stats = [
+        'total_bookings' => Booking::count(),
+        'pending_bookings' => Booking::where('status', 'pending')->count(),
+        'completed_projects' => Booking::where('status', 'completed')->count(),
+    ];
+    
+    return response()->json($stats);
+}
+
+public function getRecent()
+{
+    $recentBookings = Booking::latest()
+            ->take(3)
+            ->get();
+            
+        return response()->json($recentBookings);
+    }
 }
  
