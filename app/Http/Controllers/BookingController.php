@@ -23,7 +23,7 @@ class BookingController extends Controller
             'status',
             'created_at',
             'updated_at')
-            ->get();
+        ->get();
         
         return response()->json($bookings);
     }
